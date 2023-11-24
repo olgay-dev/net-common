@@ -1,0 +1,150 @@
+snmpwalk -c private -v 1 10.180.6.5 .1.3.6.1.4.1.4249
+
+.1.3.6.1.4.1.4249.1.31.1.4
+.1.3.6.1.4.1.4249.1.31.1.3.1.9.2
+
+
+---
+SNMPv2-SMI::enterprises.4249.1.31.1.3.1.2.1 = STRING: "Radio1"
+SNMPv2-SMI::enterprises.4249.1.31.1.3.1.2.2 = STRING: "Radio2"
+SNMPv2-SMI::enterprises.4249.1.31.1.3.1.2.3 = STRING: "Radio3"
+---
+
+	ChannelStatusId OBJECT-TYPE
+		SYNTAX  INTEGER(1..3)
+		ACCESS  read-only
+		STATUS  optional
+		DESCRIPTION
+			"Channel number."
+		::= { ChannelStatusEntry 1 }
+
+SNMPv2-SMI::enterprises.4249.1.31.3.1.1.1.1 = INTEGER: 1
+SNMPv2-SMI::enterprises.4249.1.31.3.1.1.1.2 = INTEGER: 2
+SNMPv2-SMI::enterprises.4249.1.31.3.1.1.1.3 = INTEGER: 3
+
+---
+
+	ChannelStatusStateLink OBJECT-TYPE
+		SYNTAX  INTEGER {
+			off(0),
+			to_be_stopped(1),
+			starting(2),
+			started(3),
+			connected(4),
+			reconnecting(5)
+		}
+SNMPv2-SMI::enterprises.4249.1.31.3.1.1.2.1 = INTEGER: 5
+SNMPv2-SMI::enterprises.4249.1.31.3.1.1.2.2 = INTEGER: 4
+SNMPv2-SMI::enterprises.4249.1.31.3.1.1.2.3 = INTEGER: 4
+
+--
+
+	NetStatPR OBJECT-TYPE
+		SYNTAX  Gauge
+		ACCESS  read-only
+		STATUS  optional
+		DESCRIPTION
+			"Packets received number."
+		::= { NetStatEntry 5 }
+
+SNMPv2-SMI::enterprises.4249.1.31.3.1.1.5.1 = INTEGER: 1024
+SNMPv2-SMI::enterprises.4249.1.31.3.1.1.5.2 = INTEGER: 1024
+SNMPv2-SMI::enterprises.4249.1.31.3.1.1.5.3 = INTEGER: 1024
+
+---
+
+	ChannelIP OBJECT-TYPE
+		SYNTAX  IpAddress
+		ACCESS  read-write
+		STATUS  optional
+		DESCRIPTION
+			"IP address for radio channel."
+		::= { ChannelEntry 3 }
+
+SNMPv2-SMI::enterprises.4249.1.31.2.4.3.1.3.1 = IpAddress: 239.239.0.1
+SNMPv2-SMI::enterprises.4249.1.31.2.4.3.1.3.2 = IpAddress: 239.239.0.2
+SNMPv2-SMI::enterprises.4249.1.31.2.4.3.1.3.3 = IpAddress: 239.239.0.3
+
+
+SNMPv2-SMI::enterprises.4249.1.31.3.1.1.4.1 = STRING: "unknown"
+SNMPv2-SMI::enterprises.4249.1.31.3.1.1.4.2 = STRING: "vlc 2.1.4"
+SNMPv2-SMI::enterprises.4249.1.31.3.1.1.4.3 = STRING: "vlc 2.1.4"
+
+
+--
+
+SNMPv2-SMI::enterprises.4249.2.3.1.0 = STRING: "FG-ACE-CON-VF/Eth,V2"
+SNMPv2-SMI::enterprises.4249.2.3.2.0 = STRING: "office"
+SNMPv2-SMI::enterprises.4249.2.3.3.0 = STRING: "1.0"
+SNMPv2-SMI::enterprises.4249.2.3.4.0 = STRING: "2.6.1.3 svn(619)"
+SNMPv2-SMI::enterprises.4249.2.3.5.0 = STRING: "Dec  9 2014"
+
+===
+Создать элемент данных:
+Имя: DeviceModel
+Тип: SNMPv1 агент
+Ключ: DevModel
+SNMP OID: 1.3.6.1.4.1.4249.2.3.1.0
+SNMP community: {$SNMP_COMMUNITY}
+Тип информации: Текст
+Интервал обновления: 60s
+Период хранения истории: 90d
+Период хранения динамики изменений: 365d
+Группы элементов данных:  NETRADIO
+Создать активированным: True
+
+
+Создать элемент данных:
+Имя: DeviceLocation
+Тип: SNMPv1 агент
+Ключ: DevLocation
+SNMP OID: 1.3.6.1.4.1.4249.2.3.2.0
+SNMP community: {$SNMP_COMMUNITY}
+Тип информации: Текст
+Интервал обновления: 60s
+Период хранения истории: 90d
+Период хранения динамики изменений: 365d
+Группы элементов данных:  NETRADIO
+Создать активированным: True
+
+
+
+Создать правило обнаружения:
+Имя: Netradio discovery
+Тип: SNMPv1 агент
+Ключ: Radio
+SNMP OID: discovery[{#CHANNUM},1.3.6.1.4.1.4249.1.31.3.1.1.1, {#CHANIP},1.3.6.1.4.1.4249.1.31.2.4.3.1.3, {#CHANSTATUS},1.3.6.1.4.1.4249.1.31.3.1.1.2]
+SNMP community: {$SNMP_COMMUNITY}
+Интервал обновления: 60s
+Активировано: True
+
+
+Создать протопит элемента данных:
+Имя: Channel[{#CHANNUM}][{#CHANIP}]Status
+Тип: SNMPv1 агент
+Ключ: ChanStatus[{#CHANNUM}]
+SNMP OID: 1.3.6.1.4.1.4249.1.31.3.1.1.2.{#SNMPINDEX}
+SNMP community: {$SNMP_COMMUNITY}
+Тип информации: Числовой (целое положительное)
+Интервал обновления: 60s
+Период хранения истории: 90d
+Период хранения динамики изменений: 180d
+Отображение значения: NETRADIO-MIB::ChanOperStatus
+Группы элементов данных: NETRADIO
+Создать активированным: True
+
+Создать прототип триггера:
+Имя: Interface[{#IFNAME}]Status is down
+Выражение триггера: {Template SNMP Cisco Catalyst Switch:ifStatus[{#IFNAME}].last()}=2 and {Template SNMP Cisco Catalyst Switch:ifStatus[{#IFNAME}].prev()}=1
+
+
+
+Преобразование значений:
+NETRADIO-MIB::ChanOperStatus
+			off(0),
+			to_be_stopped(1),
+			starting(2),
+			started(3),
+			connected(4),
+			reconnecting(5)
+
