@@ -1,0 +1,169 @@
+MES-2124F:
+    snmp_name: MES2124F 28-port Fiber 1G Managed Switch
+    port_count: 28
+    snmp_port_index_start: 49
+    firmware_oid: .1.3.6.1.4.1.89.2.4.0
+    self_mac: .1.3.6.1.4.1.89.53.4.1.7.1
+    ddm_oid: .1.3.6.1.4.1.89.90.1.2.1.3
+    #port_hex_length: 16
+    port_hex_length: 128
+
+MES-2324FB:
+    snmp_name: MES2324FB 28-port 1G/10G Managed Switch
+    port_count: 28
+    snmp_port_index_start: 49
+    firmware_oid: .1.3.6.1.4.1.89.2.4.0
+    self_mac: .1.3.6.1.4.1.89.53.4.1.7.1
+    ddm_oid: .1.3.6.1.4.1.89.90.1.2.1.3
+    battery: 1.3.6.1.4.1.35265.1.23.11.1.1.3
+    power_status: 1.3.6.1.4.1.89.53.15.1.2
+    #port_hex_length: 16
+    port_hex_length: 128
+
+MES-2324B:
+    snmp_name: MES2324B 28-port 1G/10G Managed Switch
+    port_count: 28
+    snmp_port_index_start: 49
+    firmware_oid: .1.3.6.1.4.1.89.2.4.0
+    self_mac: .1.3.6.1.4.1.89.53.4.1.7.1
+    ddm_oid: .1.3.6.1.4.1.89.90.1.2.1.3
+    battery: 1.3.6.1.4.1.35265.1.23.11.1.1.3
+    power_status: 1.3.6.1.4.1.89.53.15.1.2
+    #port_hex_length: 16
+    port_hex_length: 128
+
+MES-2348B:
+    snmp_name: MES2348B 52-port 1G/10G Managed Switch
+    port_count: 52
+    snmp_port_index_start: 49
+    firmware_oid: .1.3.6.1.4.1.89.2.4.0
+    self_mac: .1.3.6.1.4.1.89.53.4.1.7.1
+    ddm_oid: .1.3.6.1.4.1.89.90.1.2.1.3
+    battery: 1.3.6.1.4.1.35265.1.23.11.1.1.3
+    power_status: 1.3.6.1.4.1.89.53.15.1.2
+    #port_hex_length: 32
+    port_hex_length: 128
+
+MES-2324 AC:
+    snmp_name: MES2324 AC 28-port 1G/10G Managed Switch
+    port_count: 28
+    snmp_port_index_start: 49
+    firmware_oid: .1.3.6.1.4.1.89.2.4.0
+    self_mac: .1.3.6.1.4.1.89.53.4.1.7.1
+    ddm_oid: .1.3.6.1.4.1.89.90.1.2.1.3
+    battery: 1.3.6.1.4.1.35265.1.23.11.1.1.3
+    power_status: 1.3.6.1.4.1.89.53.15.1.2
+    #port_hex_length: 16
+    port_hex_length: 128
+
+MES-2124M AC:
+    snmp_name: MES2124M AC 28-port 1G Managed Switch
+    port_count: 28
+    snmp_port_index_start: 49
+    firmware_oid: .1.3.6.1.4.1.89.2.4.0
+    self_mac: .1.3.6.1.4.1.89.53.4.1.7.1
+    ddm_oid: .1.3.6.1.4.1.89.90.1.2.1.3
+    #port_hex_length: 16
+    port_hex_length: 128
+
+MES-2324:
+    snmp_name: MES2324 28-port 1G/10G Managed Switch
+    port_count: 28
+    snmp_port_index_start: 49
+    firmware_oid: .1.3.6.1.4.1.89.2.4.0
+    self_mac: .1.3.6.1.4.1.89.53.4.1.7.1
+    ddm_oid: .1.3.6.1.4.1.89.90.1.2.1.3
+    battery: 1.3.6.1.4.1.35265.1.23.11.1.1.3
+    power_status: 1.3.6.1.4.1.89.53.15.1.2
+    #port_hex_length: 16
+    port_hex_length: 128
+
+MES-2124:
+    snmp_name: MES2124 28-port 1G Managed Switch
+    port_count: 28
+    snmp_port_index_start: 49
+    firmware_oid: .1.3.6.1.4.1.89.2.4.0
+    self_mac: .1.3.6.1.4.1.89.53.4.1.7.1
+    ddm_oid: .1.3.6.1.4.1.89.90.1.2.1.3
+    #port_hex_length: 16
+    port_hex_length: 128
+
+MES-1124M AC:
+    snmp_name: MES1124M AC 28-port 100M/1G Managed Switch
+    port_count: 28
+    snmp_port_index_start: 1
+    firmware_oid: .1.3.6.1.4.1.89.2.4.0
+    self_mac: .1.3.6.1.4.1.89.53.4.1.7.1
+    ddm_oid: .1.3.6.1.4.1.89.90.1.2.1.3
+    #port_hex_length: 16
+    port_hex_length: 128
+
+MES-3316F:
+    snmp_name: MES3316F 20-port 1G/10G Managed Switch
+    port_count: 20
+    snmp_port_index_start: 49
+    firmware_oid: .1.3.6.1.4.1.89.2.4.0
+    self_mac: .1.3.6.1.4.1.89.53.4.1.7.1
+    ddm_oid: .1.3.6.1.4.1.89.90.1.2.1.3
+    battery: 1.3.6.1.4.1.35265.1.23.11.1.1.3
+    power_status: 1.3.6.1.4.1.89.53.15.1.2
+    #port_hex_length: 16
+    port_hex_length: 128
+
+MES-3124:
+    snmp_name: MES3124 28-port 1G/10G Managed Switch
+    port_count: 28
+    snmp_port_index_start: 49
+    firmware_oid: .1.3.6.1.4.1.89.2.4.0
+    self_mac: .1.3.6.1.4.1.89.53.4.1.7.1
+    ddm_oid: .1.3.6.1.4.1.89.90.1.2.1.3
+    battery: 1.3.6.1.4.1.35265.1.23.11.1.1.3
+    power_status: 1.3.6.1.4.1.89.53.15.1.2
+    #port_hex_length: 16
+    port_hex_length: 128
+
+MES-2324FB AC:
+    snmp_name: MES2324FB AC 28-port 1G/10G Managed Switch
+    port_count: 28
+    snmp_port_index_start: 49
+    firmware_oid: .1.3.6.1.4.1.89.2.4.0
+    self_mac: .1.3.6.1.4.1.89.53.4.1.7.1
+    ddm_oid: .1.3.6.1.4.1.89.90.1.2.1.3
+    battery: 1.3.6.1.4.1.35265.1.23.11.1.1.3
+    power_status: 1.3.6.1.4.1.89.53.15.1.2
+    #port_hex_length: 16
+    port_hex_length: 128
+
+MES-3116F:
+    snmp_name: MES3116F 18-port Fiber 1G/10G Managed Switch
+    port_count: 28
+    snmp_port_index_start: 49
+    firmware_oid: .1.3.6.1.4.1.89.2.4.0
+    self_mac: .1.3.6.1.4.1.89.53.4.1.7.1
+    ddm_oid: .1.3.6.1.4.1.89.90.1.2.1.3
+    battery: 1.3.6.1.4.1.35265.1.23.11.1.1.3
+    power_status: 1.3.6.1.4.1.89.53.15.1.2
+    #port_hex_length: 16
+    port_hex_length: 128
+
+MES-2124MB AC:
+    snmp_name: MES2124MB AC 28-port 1G Managed Switch
+    port_count: 28
+    snmp_port_index_start: 49
+    firmware_oid: .1.3.6.1.4.1.89.2.4.0
+    self_mac: .1.3.6.1.4.1.89.53.4.1.7.1
+    ddm_oid: .1.3.6.1.4.1.89.90.1.2.1.3
+    #port_hex_length: 16
+    port_hex_length: 128
+
+MES-5324:
+    snmp_name: MES5324 28-port 10G/40G Managed Switch
+    port_count: 28
+    snmp_port_index_start: 49
+    firmware_oid: .1.3.6.1.4.1.89.2.4.0
+    self_mac: .1.3.6.1.4.1.89.53.4.1.7.1
+    ddm_oid: .1.3.6.1.4.1.89.90.1.2.1.3
+    battery: 1.3.6.1.4.1.35265.1.23.11.1.1.3
+    power_status: 1.3.6.1.4.1.89.53.15.1.2
+    #port_hex_length: 16
+    port_hex_length: 128

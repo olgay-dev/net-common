@@ -1,0 +1,97 @@
+CRSXX:
+    model_mib_base: .1.3.6.1.4.1.14988.1
+    firmware_oid: ${model_mib_base}.1.7.4.0
+    serial_oid: ${model_mib_base}.1.7.3.0
+    reboot_oid: ${model_mib_base}.1.7.1.0
+    temperature_oid: ${model_mib_base}.1.3.10.0
+    voltage_oid: ${model_mib_base}.1.3.8.0
+    cam_table_from_api: 1
+    support_api_port_status: 1
+    support_api_port_speed: 1
+RBXX:
+    model_mib_base: .1.3.6.1.4.1.14988.1
+    firmware_oid: ${model_mib_base}.1.7.4.0
+    serial_oid: ${model_mib_base}.1.7.3.0
+    reboot_oid: ${model_mib_base}.1.7.1.0
+    temperature_oid: ${model_mib_base}.1.3.10.0
+    voltage_oid: ${model_mib_base}.1.3.8.0
+
+RB2XX:
+    model_mib_base: .1.3.6.1.4.1.14988.2
+
+CCR10XX:
+    model_mib_base: .1.3.6.1.4.1.14988.1
+    cpu_usage_oid: .1.3.6.1.4.1.2021.11.10.0
+
+CRS125-24G-1S:
+    product_line: CRSXX
+    port_count: 25
+    snmp_name: RouterOS CRS125-24G-1S
+    ether_count: 24
+
+RB750UP:
+    product_line: RBXX
+    port_count: 5
+    snmp_name: RouterOS RB750UP
+    ether_count: 5
+
+RB260G:
+    product_line: RB2XX
+    port_count: 6
+    snmp_name: RB260G
+    ether_count: 5
+
+RB260GSP:
+    product_line: RB2XX
+    port_count: 6
+    snmp_name: RB260GSP
+    ether_count: 5
+
+hEX:
+    model_mib_base: .1.3.6.1.4.1.14988.1
+    firmware_oid: ${model_mib_base}.1.7.4.0
+    serial_oid: ${model_mib_base}.1.7.3.0
+    reboot_oid: ${model_mib_base}.1.7.1.0
+    temperature_oid: ${model_mib_base}.1.3.10.0
+    voltage_oid: ${model_mib_base}.1.3.8.0
+
+RB4011iGS+RM:
+    model_mib_base: .1.3.6.1.4.1.14988.1
+    firmware_oid: ${model_mib_base}.1.7.4.0
+    serial_oid: ${model_mib_base}.1.7.3.0
+    reboot_oid: ${model_mib_base}.1.7.1.0
+    temperature_oid: ${model_mib_base}.1.3.10.0
+    voltage_oid: ${model_mib_base}.1.3.8.0
+    cpu_usage_oid: .1.3.6.1.4.1.2021.11.10.0
+
+RB1100AHX2:
+    product_line: RBXX
+    port_count: 13
+    snmp_name: RouterOS RB1100AHx2
+
+CCR-1009:
+    product_line: CCR10XX
+    port_count: 9
+    snmp_name: RouterOS CCR1009-7G-1C-1S+
+
+CCR-1036-8G-2S+:
+    product_line: CCR10XX
+    port_count: 10
+    snmp_name: RouterOS CCR1036-8G-2S+
+
+CCR-1036-12G-4S:
+    product_line: CCR10XX
+    port_count: 16
+    snmp_name: RouterOS CCR1036-12G-4S
+
+CCR-1036-12G-4S-EM:
+    product_line: CCR10XX
+    port_count: 16
+    snmp_name: RouterOS CCR1036-12G-4S-EM
+
+CCR-1016-12G:
+    product_line: CCR10XX
+    port_count: 12
+    snmp_name: RouterOS CCR1016-12G
+
+

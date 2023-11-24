@@ -1,0 +1,223 @@
+ECS3510-28T:
+    port_count: 28
+    snmp_name: ECS3510-28T
+
+    self_mac: .1.0.8802.1.1.2.1.3.2.0
+
+    model_mib_base: .1.3.6.1.4.1.171.10.75.15
+
+    mac_ip_des_1210_style: true
+    mac_ip_binding_oid: ${model_mib_base}.2.14.10
+    mac_ip_entities: .3.1.4
+    mac_ip_port: .1.1.6
+    enable_mac_ip_acl: false
+    mac_ip_binding_set_sleep: 1
+
+    no_mac_ip_binding_for_ports: [25, 26, 27, 28]
+
+    cable_diag_oid: ${model_mib_base}.2.35.1.1
+    cable_diag_pair_rename: 3-1
+
+    cpu_usage: .1.3.6.1.4.1.259.10.1.27.1.39.2.1.0
+    firmware_oid: .1.3.6.1.2.1.16.19.2.0
+    serialnum_oid: .1.3.6.1.2.1.47.1.1.1.1.11.101
+
+    bandwidth_oid_base: ${model_mib_base}.2.13.1.2.1
+    bandwidth_multiplier: 1024
+    port_nway_state_oid: ${model_mib_base}.2.1.13.1.3
+
+    nway_snmp_values:
+        1000_full: 1
+        100_full: 2
+        100_half: 3
+        10_full: 4
+        10_half: 5
+        auto: 6
+
+    port_admin_status_oid: .1.3.6.1.2.1.2.2.1.7
+    snmp_admin_status_on: 1
+
+    mac_ip_enable_port_value: 1
+    mac_ip_disable_port_value: 0
+    no_native_snmpwalk: 1
+
+    tftp_handle_style: dgs
+    tftp_oid: ${model_mib_base}.2.3
+
+ES3528M:
+    port_count: 28
+    snmp_name: Edge-Core FE L2 Switch ES3528M
+
+    self_mac: .1.0.8802.1.1.2.1.3.2.0
+
+    model_mib_base: .1.3.6.1.4.1.171.10.75.15
+
+    mac_ip_des_1210_style: true
+    mac_ip_binding_oid: ${model_mib_base}.2.14.10
+    mac_ip_entities: .3.1.4
+    mac_ip_port: .1.1.6
+    enable_mac_ip_acl: false
+    mac_ip_binding_set_sleep: 1
+
+    no_mac_ip_binding_for_ports: [25, 26, 27, 28]
+
+    cable_diag_oid: ${model_mib_base}.2.35.1.1
+    cable_diag_pair_rename: 3-1
+
+    cpu_usage: .1.3.6.1.4.1.259.6.10.94.1.39.2.3.0
+    firmware_oid: .1.3.6.1.2.1.16.19.2.0
+    serialnum_oid: .1.3.6.1.2.1.47.1.1.1.1.11.101
+
+    bandwidth_oid_base: ${model_mib_base}.2.13.1.2.1
+    bandwidth_multiplier: 1024
+    port_nway_state_oid: ${model_mib_base}.2.1.13.1.3
+
+    nway_snmp_values:
+        1000_full: 1
+        100_full: 2
+        100_half: 3
+        10_full: 4
+        10_half: 5
+        auto: 6
+
+    port_admin_status_oid: .1.3.6.1.2.1.2.2.1.7
+    snmp_admin_status_on: 1
+
+    mac_ip_enable_port_value: 1
+    mac_ip_disable_port_value: 0
+    no_native_snmpwalk: 1
+
+
+ES3552M:
+    port_count: 52
+    snmp_name: Edge-Core FE L2 Switch ES3552M
+
+    self_mac: .1.0.8802.1.1.2.1.3.2.0
+
+    model_mib_base: .1.3.6.1.4.1.171.10.75.15
+
+    mac_ip_des_1210_style: true
+    mac_ip_binding_oid: ${model_mib_base}.2.14.10
+    mac_ip_entities: .3.1.4
+    mac_ip_port: .1.1.6
+    enable_mac_ip_acl: false
+    mac_ip_binding_set_sleep: 1
+
+    no_mac_ip_binding_for_ports: [25, 26, 27, 28]
+
+    cable_diag_oid: ${model_mib_base}.2.35.1.1
+    cable_diag_pair_rename: 3-1
+
+    cpu_usage: .1.3.6.1.4.1.259.6.10.94.1.39.2.3.0
+    firmware_oid: .1.3.6.1.2.1.16.19.2.0
+    serialnum_oid: .1.3.6.1.2.1.47.1.1.1.1.11.101
+
+    bandwidth_oid_base: ${model_mib_base}.2.13.1.2.1
+    bandwidth_multiplier: 1024
+    port_nway_state_oid: ${model_mib_base}.2.1.13.1.3
+
+    nway_snmp_values:
+        1000_full: 1
+        100_full: 2
+        100_half: 3
+        10_full: 4
+        10_half: 5
+        auto: 6
+
+    port_admin_status_oid: .1.3.6.1.2.1.2.2.1.7
+    snmp_admin_status_on: 1
+
+    mac_ip_enable_port_value: 1
+    mac_ip_disable_port_value: 0
+    no_native_snmpwalk: 1
+
+
+ES3526XA:
+    port_count: 26
+    snmp_name: Layer2+ Fast Ethernet Standalone Switch ES3526XA
+
+    self_mac: .1.0.8802.1.1.2.1.3.2.0
+
+    model_mib_base: .1.3.6.1.4.1.171.10.75.15
+
+    mac_ip_des_1210_style: true
+    mac_ip_binding_oid: ${model_mib_base}.2.14.10
+    mac_ip_entities: .3.1.4
+    mac_ip_port: .1.1.6
+    enable_mac_ip_acl: false
+    mac_ip_binding_set_sleep: 1
+
+    no_mac_ip_binding_for_ports: [25, 26, 27, 28]
+
+    cable_diag_oid: ${model_mib_base}.2.35.1.1
+    cable_diag_pair_rename: 3-1
+
+    cpu_usage: .1.3.6.1.4.1.259.6.10.94.1.39.2.3.0
+    firmware_oid: .1.3.6.1.2.1.16.19.2.0
+    serialnum_oid: .1.3.6.1.2.1.47.1.1.1.1.11.101
+
+    bandwidth_oid_base: ${model_mib_base}.2.13.1.2.1
+    bandwidth_multiplier: 1024
+    port_nway_state_oid: ${model_mib_base}.2.1.13.1.3
+
+    nway_snmp_values:
+        1000_full: 1
+        100_full: 2
+        100_half: 3
+        10_full: 4
+        10_half: 5
+        auto: 6
+
+    port_admin_status_oid: .1.3.6.1.2.1.2.2.1.7
+    snmp_admin_status_on: 1
+
+    mac_ip_enable_port_value: 1
+    mac_ip_disable_port_value: 0
+    no_native_snmpwalk: 1
+
+ECS3510-52T:
+    port_count: 52
+    snmp_name: ECS3510-52T
+
+    self_mac: .1.0.8802.1.1.2.1.3.2.0
+
+    model_mib_base: .1.3.6.1.4.1.171.10.75.15
+
+    mac_ip_des_1210_style: true
+    mac_ip_binding_oid: ${model_mib_base}.2.14.10
+    mac_ip_entities: .3.1.4
+    mac_ip_port: .1.1.6
+    enable_mac_ip_acl: false
+    mac_ip_binding_set_sleep: 1
+
+    no_mac_ip_binding_for_ports: [25, 26, 27, 28]
+
+    cable_diag_oid: ${model_mib_base}.2.35.1.1
+    cable_diag_pair_rename: 3-1
+
+    cpu_usage: .1.3.6.1.4.1.259.10.1.27.1.39.2.1.0
+    firmware_oid: .1.3.6.1.2.1.16.19.2.0
+    serialnum_oid: .1.3.6.1.2.1.47.1.1.1.1.11.101
+
+    bandwidth_oid_base: ${model_mib_base}.2.13.1.2.1
+    bandwidth_multiplier: 1024
+    port_nway_state_oid: ${model_mib_base}.2.1.13.1.3
+
+    nway_snmp_values:
+        1000_full: 1
+        100_full: 2
+        100_half: 3
+        10_full: 4
+        10_half: 5
+        auto: 6
+
+    port_admin_status_oid: .1.3.6.1.2.1.2.2.1.7
+    snmp_admin_status_on: 1
+
+    mac_ip_enable_port_value: 1
+    mac_ip_disable_port_value: 0
+    no_native_snmpwalk: 1
+
+    tftp_handle_style: dgs
+    tftp_oid: ${model_mib_base}.2.3
+    

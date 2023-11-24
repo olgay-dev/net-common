@@ -1,0 +1,57 @@
+Cat2960G-8:
+    port_count: 8
+
+Cat2960G-24:
+    port_count: 24
+
+Cat 4948-10G:
+    port_count: 50
+
+Cat WS-C3750G:
+    port_count: 28
+    snmp_port_index_start: 10101
+    snmp_name: "Cisco IOS Software, C3750 Software (C3750-IPSERVICESK9-M), Version 12.2(55)SE12, RELEASE SOFTWARE (fc2)\r\nTechnical Support: http://www.cisco.com/techsupport\r\nCopyright (c) 1986-2017 by Cisco Systems, Inc.\r\nCompiled Thu 28-Sep-17 02:29 by prod_rel_team"
+
+Cat WS-C3560G:
+    port_count: 28
+    snmp_port_index_start: 10101
+    snmp_name: "Cisco IOS Software, C3560 Software (C3560-IPSERVICESK9-M), Version 12.2(55)SE10, RELEASE SOFTWARE (fc2)\r\nTechnical Support: http://www.cisco.com/techsupport\r\nCopyright (c) 1986-2015 by Cisco Systems, Inc.\r\nCompiled Wed 11-Feb-15 11:34 by prod_rel_team"
+
+Cat WS-C2960G-8TC-L:
+    port_count: 10
+    snmp_port_index_start: 10101
+    snmp_name: "Cisco IOS Software, C2960 Software (C2960-LANBASE-M), Version 12.2(35)SE5, RELEASE SOFTWARE (fc1)\r\nCopyright (c) 1986-2007 by Cisco Systems, Inc.\r\nCompiled Thu 19-Jul-07 20:06 by nachen"
+
+Cat WS-C3560CG:
+    port_count: 13
+    snmp_port_index_start: 10101
+    snmp_name: "Cisco IOS Software, C3560C Software (C3560c405ex-UNIVERSALK9-M), Version 15.0(2)SE8, RELEASE SOFTWARE (fc1)\r\nTechnical Support: http://www.cisco.com/techsupport\r\nCopyright (c) 1986-2015 by Cisco Systems, Inc.\r\nCompiled Thu 14-May-15 03:33 by prod_rel_team"
+
+Cat WS-C3550-12G:
+    port_count: 12
+    snmp_port_index_start: 1
+    snmp_name: "Cisco IOS Software, C3550 Software (C3550-IPSERVICESK9-M), Version 12.2(44)SE6, RELEASE SOFTWARE (fc1)\r\nCopyright (c) 1986-2009 by Cisco Systems, Inc.\r\nCompiled Mon 09-Mar-09 20:28 by gereddy"
+
+Cat WS-C3750-12G:
+    port_count: 12
+    snmp_port_index_start: 10101
+    snmp_name: "Cisco IOS Software, C3750 Software (C3750-IPSERVICESK9-M), Version 12.2(53)SE2, RELEASE SOFTWARE (fc3)\r\nTechnical Support: http://www.cisco.com/techsupport\r\nCopyright (c) 1986-2010 by Cisco Systems, Inc.\r\nCompiled Wed 21-Apr-10 04:49 by prod_rel_team"
+
+Cat WS-C3560CX:
+    port_count: 16
+    snmp_port_index_start: 10101
+    snmp_name: "Cisco IOS Software, C3560CX Software (C3560CX-UNIVERSALK9-M), Version 15.2(4)E3, RELEASE SOFTWARE (fc2)\r\nTechnical Support: http://www.cisco.com/techsupport\r\nCopyright (c) 1986-2016 by Cisco Systems, Inc.\r\nCompiled Sun 06-Nov-16 22:35 by prod_rel_team"
+
+Cat WS-C3560:
+    port_count: 24
+    snmp_port_index_start: 10001
+    snmp_name: "Cisco IOS Software, C3560 Software (C3560-ADVIPSERVICESK9-M), Version 12.2(46)SE, RELEASE SOFTWARE (fc2)\r\nCopyright (c) 1986-2008 by Cisco Systems, Inc.\r\nCompiled Thu 21-Aug-08 15:26 by nachen"
+
+Cat WS-C2950-24:
+    port_count: 24
+    snmp_port_index_start: 1
+    snmp_name: "Cisco Internetwork Operating System Software \r\nIOS (tm) C2950 Software (C2950-I6Q4L2-M), Version 12.1(22)EA8, RELEASE SOFTWARE (fc1)\r\nCopyright (c) 1986-2006 by cisco Systems, Inc.\r\nCompiled Fri 12-May-06 17:19 by myl"
+
+Cat ASR1004:
+    port_count: 2
+    snmp_name: "Cisco IOS Software, IOS-XE Software (X86_64_LINUX_IOSD-ADVENTERPRISEK9-M), Version 15.1(2)S, RELEASE SOFTWARE (fc1)\r\nTechnical Support: http://www.cisco.com/techsupport\r\nCopyright (c) 1986-2011 by Cisco Systems, Inc.\r\nCompiled Thu 24-Mar-11 23:41 by mcpre"
