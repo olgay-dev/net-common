@@ -1,0 +1,1104 @@
+
+-- Nateks MIB v1
+
+NETRADIO-MIB DEFINITIONS ::= BEGIN
+
+IMPORTS
+    mgmt, enterprises, NetworkAddress, IpAddress, Counter, Gauge,
+    TimeTicks
+        FROM RFC1155-SMI
+    DisplayString
+        FROM RFC1213-MIB 
+    OBJECT-TYPE
+        FROM RFC-1212;
+
+Nateks  OBJECT IDENTIFIER ::= { enterprises 4249 }
+	NateksProducts  OBJECT IDENTIFIER ::= { Nateks 1 }
+		NetRadio   OBJECT IDENTIFIER ::= { NateksProducts 31 }
+			PerfomanceMgt OBJECT IDENTIFIER ::= { NetRadio 1 }
+				OutputStat OBJECT IDENTIFIER ::= { PerfomanceMgt 4 }
+			ConfigurationMgt OBJECT IDENTIFIER ::= { NetRadio 2 }
+				ConfigNet OBJECT IDENTIFIER ::= { ConfigurationMgt 2 }
+				ConfigSNMP OBJECT IDENTIFIER ::= { ConfigurationMgt 3 }
+				ConfigRadio OBJECT IDENTIFIER ::= { ConfigurationMgt 4 }
+				ConfigTime OBJECT IDENTIFIER ::= { ConfigurationMgt 5 }
+			MaintenanceMgt OBJECT IDENTIFIER ::= { NetRadio 3 }
+				Alarm OBJECT IDENTIFIER ::= { MaintenanceMgt 3 }
+			TrapMgt OBJECT IDENTIFIER ::= { NetRadio 4 }
+	NateksMgmt      OBJECT IDENTIFIER ::= { Nateks 2 }
+		SysInfo      OBJECT IDENTIFIER ::= { NateksMgmt 3 }
+
+----------------------------------------
+--------- Perfomance management
+----------------------------------------
+
+	StatReset OBJECT-TYPE
+		SYNTAX  INTEGER {
+					reset(1), 
+					readValue(2)
+		}
+		ACCESS  read-write
+		STATUS  mandatory
+		DESCRIPTION
+			"Writing reset(1) to StatReset will reset statistics for Ethernet and Radio interfaces."
+		::= { PerfomanceMgt 1 }
+
+
+----Net statistics---------
+	
+	NetStatTable OBJECT-TYPE
+		SYNTAX  SEQUENCE OF NetStatEntry
+		ACCESS  not-accessible
+		STATUS  optional
+		DESCRIPTION
+			"Net statistics."
+		::= { PerfomanceMgt 2 }
+
+	NetStatEntry OBJECT-TYPE
+		SYNTAX  NetStatEntry
+		ACCESS  not-accessible
+		STATUS  optional
+		DESCRIPTION
+			"Net statistics params."
+		INDEX   { NetStatId }
+		::= { NetStatTable 1 }
+
+	NetStatEntry ::=
+		SEQUENCE {
+			NetStatId
+				INTEGER,
+			NetStatName
+				DisplayString,
+			NetStatPS
+				Gauge,
+			NetStatBS
+				Gauge,
+			NetStatPR
+				Gauge,
+			NetStatBR
+				Gauge,
+			NetStatAvailableTime	
+				Gauge,
+			NetStatUnavailableTime	
+				Gauge
+        }
+
+	NetStatId OBJECT-TYPE
+		SYNTAX  INTEGER(1..1)
+		ACCESS  read-only
+		STATUS  optional
+		DESCRIPTION
+			"Ethernet port number."
+		::= { NetStatEntry 1 }
+
+	NetStatName OBJECT-TYPE
+		SYNTAX   DisplayString (SIZE (0..8)) 
+		ACCESS  read-only
+		STATUS  optional
+		DESCRIPTION
+			"Statistics name."
+		::= { NetStatEntry 2 }
+
+	NetStatPS OBJECT-TYPE
+		SYNTAX  Gauge
+		ACCESS  read-only
+		STATUS  optional
+		DESCRIPTION
+			"Packets send number."
+		::= { NetStatEntry 3 }
+
+	NetStatBS OBJECT-TYPE
+		SYNTAX  Gauge
+		ACCESS  read-only
+		STATUS  optional
+		DESCRIPTION
+			"Bytes send number."
+		::= { NetStatEntry 4 }
+	
+	NetStatPR OBJECT-TYPE
+		SYNTAX  Gauge
+		ACCESS  read-only
+		STATUS  optional
+		DESCRIPTION
+			"Packets received number."
+		::= { NetStatEntry 5 }
+
+	NetStatBR OBJECT-TYPE
+		SYNTAX  Gauge
+		ACCESS  read-only
+		STATUS  optional
+		DESCRIPTION
+			"Bytes received number."
+		::= { NetStatEntry 6 }
+	
+	NetStatAvailableTime OBJECT-TYPE
+		SYNTAX  Gauge
+		ACCESS  read-only
+		STATUS  optional
+		DESCRIPTION
+		"Available time in seconds."
+		::= { NetStatEntry 7 }
+
+	NetStatUnavailableTime OBJECT-TYPE
+		SYNTAX  Gauge
+		ACCESS  read-only
+		STATUS  optional
+		DESCRIPTION
+		"Unavailable time in seconds."
+		::= { NetStatEntry 8 }
+
+----Radio statistics---------
+	
+	RadioStatTable OBJECT-TYPE
+		SYNTAX  SEQUENCE OF RadioStatEntry
+		ACCESS  not-accessible
+		STATUS  optional
+		DESCRIPTION
+			"Radio statistics."
+		::= { PerfomanceMgt 3 }
+
+	RadioStatEntry OBJECT-TYPE
+		SYNTAX  NetStatEntry
+		ACCESS  not-accessible
+		STATUS  optional
+		DESCRIPTION
+			"Radio statistics params."
+		INDEX   { RadioStatId }
+		::= { RadioStatTable 1 }
+
+	RadioStatEntry ::=
+		SEQUENCE {
+			RadioStatId
+				INTEGER,
+			RadioStatName
+				DisplayString,
+			RadioStatAvailableTime	
+				Gauge,
+			RadioStatUnavailableTime	
+				Gauge,
+			RadioStatIncorrectSamplerate	
+				Gauge,
+			RadioStatDecoded	
+				Gauge,
+			RadioStatRecoverableErrors	
+				Gauge,
+			RadioStatUnrecoverableErrors	
+				Gauge,
+			RadioStatServerReconnections	
+				Gauge
+        }
+
+	RadioStatId OBJECT-TYPE
+		SYNTAX  INTEGER(1..3)
+		ACCESS  read-only
+		STATUS  optional
+		DESCRIPTION
+			"Radio channel number."
+		::= { RadioStatEntry 1 }
+
+	RadioStatName OBJECT-TYPE
+		SYNTAX   DisplayString (SIZE (0..8)) 
+		ACCESS  read-only
+		STATUS  optional
+		DESCRIPTION
+			"Statistics name."
+		::= { RadioStatEntry 2 }
+
+	RadioStatAvailableTime OBJECT-TYPE
+		SYNTAX  Gauge
+		ACCESS  read-only
+		STATUS  optional
+		DESCRIPTION
+		"Available time in seconds."
+		::= { RadioStatEntry 3 }
+
+	RadioStatUnavailableTime OBJECT-TYPE
+		SYNTAX  Gauge
+		ACCESS  read-only
+		STATUS  optional
+		DESCRIPTION
+		"Unavailable time in seconds."
+		::= { RadioStatEntry 4 }
+
+	RadioStatIncorrectSamplerate OBJECT-TYPE
+		SYNTAX  Gauge
+		ACCESS  read-only
+		STATUS  optional
+		DESCRIPTION
+		"Incorrect samplerate frames number."
+		::= { RadioStatEntry 5 }
+
+	RadioStatDecoded OBJECT-TYPE
+		SYNTAX  Gauge
+		ACCESS  read-only
+		STATUS  optional
+		DESCRIPTION
+		"Decoded frames number."
+		::= { RadioStatEntry 6 }
+
+	RadioStatRecoverableErrors OBJECT-TYPE
+		SYNTAX  Gauge
+		ACCESS  read-only
+		STATUS  optional
+		DESCRIPTION
+		"Number of frames with recoverable errors."
+		::= { RadioStatEntry 7 }
+
+	RadioStatUnrecoverableErrors OBJECT-TYPE
+		SYNTAX  Gauge
+		ACCESS  read-only
+		STATUS  optional
+		DESCRIPTION
+		"Number of frames with unrecoverable errors."
+		::= { RadioStatEntry 8 }
+
+	RadioStatServerReconnections OBJECT-TYPE
+		SYNTAX  Gauge
+		ACCESS  read-only
+		STATUS  optional
+		DESCRIPTION
+		"Number of reconnections to streamserver."
+		::= { RadioStatEntry 9 }
+
+----output statistics---------
+
+	OutputStatAvailableTime OBJECT-TYPE
+		SYNTAX  Gauge
+		ACCESS  read-only
+		STATUS  optional
+		DESCRIPTION
+		"Output available time in seconds."
+		::= { OutputStat 1 }
+
+	OutputStatUnavailableTime OBJECT-TYPE
+		SYNTAX  Gauge
+		ACCESS  read-only
+		STATUS  optional
+		DESCRIPTION
+		"Output unavailable time in seconds."
+		::= { OutputStat 2 }
+
+ 
+----------------------------------------
+--------- Configuration management
+----------------------------------------
+
+	ConfigDefault OBJECT-TYPE
+		SYNTAX  INTEGER {
+					default(1), 
+					readValue(2)
+		}
+		ACCESS  read-write
+		STATUS  mandatory
+		DESCRIPTION
+			"Writing default(1) to ConfigDefault will reset all configuration to default value. Read always return readValue(2)."
+		::= { ConfigurationMgt 1 }
+
+
+----Net configs---------
+
+	EthIP OBJECT-TYPE
+		SYNTAX	IpAddress
+		ACCESS	read-write
+		STATUS	mandatory
+		DESCRIPTION
+			"Device IP address."
+		::= { ConfigNet 1 }
+
+	EthMask OBJECT-TYPE
+		SYNTAX	IpAddress
+		ACCESS	read-write
+		STATUS	mandatory
+		DESCRIPTION
+			"Subnet mask for ethernet."
+		::= { ConfigNet 2 }
+
+	EthGateway OBJECT-TYPE
+		SYNTAX	IpAddress
+		ACCESS	read-write
+		STATUS	mandatory
+		DESCRIPTION
+			"Gateway IP address."
+		::= { ConfigNet 3 }
+
+	EthSpeedDuplex OBJECT-TYPE
+		SYNTAX  INTEGER {
+				auto(0),
+				half_10(1),
+				full_10(2),
+				half_100(3),
+				full_100(4)
+		}
+		ACCESS	read-write
+		STATUS	mandatory
+		DESCRIPTION
+			"Speed/duplex value for ethernet."
+		::= { ConfigNet 4 }
+
+
+----SNMP configs---------
+
+	SNMPSetEnabled OBJECT-TYPE
+		SYNTAX  INTEGER {
+				disabled(1),
+				enabled(2)
+		}
+		ACCESS    read-only
+		STATUS    mandatory
+		DESCRIPTION
+			"Changes via SNMP enabled or disabled."
+		::= { ConfigSNMP 1 }
+	
+	SNMPCommunity OBJECT-TYPE
+		SYNTAX   DisplayString (SIZE (0..32)) 
+		ACCESS    read-write
+		STATUS    mandatory
+		DESCRIPTION
+			"SNMP read/write community."
+		::= { ConfigSNMP 2 }
+
+	SNMPTrapCommunity OBJECT-TYPE
+		SYNTAX   DisplayString (SIZE (0..32)) 
+		ACCESS    read-write
+		STATUS    mandatory
+		DESCRIPTION
+			"SNMP trap read/write community."
+		::= { ConfigSNMP 3 }
+	
+	SNMPTrapIP1 OBJECT-TYPE
+		SYNTAX	IpAddress
+		ACCESS	read-write
+		STATUS	mandatory
+		DESCRIPTION
+			"IP address 1 for SNMP traps."
+		::= { ConfigSNMP 4 }
+
+	SNMPTrapIP2 OBJECT-TYPE
+		SYNTAX	IpAddress
+		ACCESS	read-write
+		STATUS	mandatory
+		DESCRIPTION
+			"IP address 2 for SNMP traps."
+		::= { ConfigSNMP 5 }
+
+
+----Radio configs---------
+
+	RadioSampleRate OBJECT-TYPE
+		SYNTAX  INTEGER (0..44100)
+		ACCESS  read-write
+		STATUS  mandatory
+		DESCRIPTION
+			"Radio sample rate."
+		::= { ConfigRadio 1 }
+
+	RadioOutput OBJECT-TYPE
+		SYNTAX  INTEGER {
+			off(0),
+			on(1)
+		}
+		ACCESS  read-write
+		STATUS  mandatory
+		DESCRIPTION
+			"Radio output state."
+		::= { ConfigRadio 2 }
+
+	RadioTable OBJECT-TYPE
+		SYNTAX  SEQUENCE OF ChannelEntry
+		ACCESS  not-accessible
+		STATUS  optional
+		DESCRIPTION
+			" Table of parameters for 3 channels"
+		::= { ConfigRadio 3 }
+
+	ChannelEntry OBJECT-TYPE
+		SYNTAX  ChannelEntry
+		ACCESS  not-accessible
+		STATUS  optional
+		DESCRIPTION
+			"Radio params."
+		INDEX   { ChannelId }
+		::= { RadioTable 1 }
+
+	ChannelEntry ::=
+		SEQUENCE {
+			ChannelId
+				INTEGER,
+			ChannelEnable
+				INTEGER,
+			ChannelIP
+				IpAddress,
+			ChannelPort
+				INTEGER,
+			ChannelMountPoint
+				DisplayString,
+			ChannelUserAgent
+				DisplayString,
+			ChannelBufSize	
+				INTEGER
+        }
+
+	ChannelId OBJECT-TYPE
+		SYNTAX  INTEGER(1..3)
+		ACCESS  read-only
+		STATUS  optional
+		DESCRIPTION
+			"Channel number."
+		::= { ChannelEntry 1 }
+
+	ChannelEnable OBJECT-TYPE
+		SYNTAX  INTEGER {
+			off(0),
+			on(1)
+		}
+		ACCESS  read-write
+		STATUS  optional
+		DESCRIPTION
+			"Set channel on/off."
+		::= { ChannelEntry 2 }
+
+	ChannelIP OBJECT-TYPE
+		SYNTAX  IpAddress
+		ACCESS  read-write
+		STATUS  optional
+		DESCRIPTION
+			"IP address for radio channel."
+		::= { ChannelEntry 3 }
+
+	ChannelPort OBJECT-TYPE
+		SYNTAX  INTEGER(1..65535)
+		ACCESS  read-write
+		STATUS  optional
+		DESCRIPTION
+			"Port value for radio channel."
+		::= { ChannelEntry 4 }
+
+	ChannelMountPoint OBJECT-TYPE
+		SYNTAX  DisplayString (SIZE (0..32)) 
+		ACCESS  read-write
+		STATUS  optional
+		DESCRIPTION
+			"Mount point value for radio channel."
+		::= { ChannelEntry 5 }
+
+	ChannelUserAgent OBJECT-TYPE
+		SYNTAX  DisplayString (SIZE (0..32)) 
+		ACCESS  read-write
+		STATUS  optional
+		DESCRIPTION
+			"User Agent value for radio channel."
+		::= { ChannelEntry 6 }
+
+	ChannelBufSize OBJECT-TYPE
+		SYNTAX  INTEGER(1..5)
+		ACCESS  read-write
+		STATUS  optional
+		DESCRIPTION
+			"Buffer size value in seconds."
+		::= { ChannelEntry 7 }
+
+
+----Time configs---------
+
+	TimeZone OBJECT-TYPE
+		SYNTAX   DisplayString (SIZE (0..3)) 
+		ACCESS    read-write
+		STATUS    mandatory
+		DESCRIPTION
+			"TimeZone value: -12...+14"
+		::= { ConfigTime 1 }
+
+	TimeNTP1IP OBJECT-TYPE
+		SYNTAX	IpAddress
+		ACCESS	read-write
+		STATUS	mandatory
+		DESCRIPTION
+			"IP address for first NTP server."
+		::= { ConfigTime 2 }
+
+	TimeNTP2IP OBJECT-TYPE
+		SYNTAX	IpAddress
+		ACCESS	read-write
+		STATUS	mandatory
+		DESCRIPTION
+			"IP address for second NTP server."
+		::= { ConfigTime 3 }
+
+	SchedulerTable OBJECT-TYPE
+		SYNTAX  SEQUENCE OF SchedulerEntry
+		ACCESS  not-accessible
+		STATUS  optional
+		DESCRIPTION
+			"Table with 2 time intervals for scheduler"
+		::= { ConfigTime 4 }
+
+	SchedulerEntry OBJECT-TYPE
+		SYNTAX  SchedulerEntry
+		ACCESS  not-accessible
+		STATUS  optional
+		DESCRIPTION
+			"Scheduler params."
+		INDEX   { SchedulerId }
+		::= { SchedulerTable 1 }
+
+	SchedulerEntry ::=
+		SEQUENCE {
+			SchedulerId
+				INTEGER,
+			SchedulerEnable
+				INTEGER,
+			SchedulerStopTime
+				INTEGER,
+			SchedulerStartTime
+				INTEGER
+        }
+
+	SchedulerId OBJECT-TYPE
+		SYNTAX  INTEGER(1..2)
+		ACCESS  read-only
+		STATUS  optional
+		DESCRIPTION
+			"Scheduler time interval number."
+		::= { SchedulerEntry 1 }
+
+	SchedulerEnable OBJECT-TYPE
+		SYNTAX  INTEGER {
+			off(0),
+			on(1)
+		}
+		ACCESS  read-write
+		STATUS  optional
+		DESCRIPTION
+			"Set scheduler time interval on/off."
+		::= { SchedulerEntry 2 }
+
+	SchedulerStopTime OBJECT-TYPE
+		SYNTAX  INTEGER(0..1439)
+		ACCESS  read-write
+		STATUS  optional
+		DESCRIPTION
+			"Scheduler stop time value in minutes from 00:00, for example 5:30 => 330"
+		::= { SchedulerEntry 3 }
+
+	SchedulerStartTime OBJECT-TYPE
+		SYNTAX  INTEGER(0..1439)
+		ACCESS  read-write
+		STATUS  optional
+		DESCRIPTION
+			"Scheduler start time value in minutes from 00:00, for example 5:30 => 330"
+		::= { SchedulerEntry 4 }
+
+
+----------------------------------------
+--------- Maintenance management
+----------------------------------------
+
+----Radio status---------
+	
+	RadioStatusTable OBJECT-TYPE
+		SYNTAX  SEQUENCE OF ChannelStatusEntry
+		ACCESS  not-accessible
+		STATUS  optional
+		DESCRIPTION
+			" Table of status parameters for 3 channels"
+		::= { MaintenanceMgt 1 }
+
+	ChannelStatusEntry OBJECT-TYPE
+		SYNTAX  ChannelStatusEntry
+		ACCESS  not-accessible
+		STATUS  optional
+		DESCRIPTION
+			"Radio status params."
+		INDEX   { ChannelStatusId }
+		::= { RadioStatusTable 1 }
+
+	ChannelStatusEntry ::=
+		SEQUENCE {
+			ChannelStatusId
+				INTEGER,
+			ChannelStatusStateLink
+				INTEGER,
+			ChannelStatusStream
+				DisplayString,
+			ChannelStatusServer
+				DisplayString,
+			ChannelStatusMetainterval
+				INTEGER,
+			ChannelStatusBitrate
+				INTEGER,
+			ChannelStatusSamplerate	
+				INTEGER
+        }
+
+	ChannelStatusId OBJECT-TYPE
+		SYNTAX  INTEGER(1..3)
+		ACCESS  read-only
+		STATUS  optional
+		DESCRIPTION
+			"Channel number."
+		::= { ChannelStatusEntry 1 }
+
+	ChannelStatusStateLink OBJECT-TYPE
+		SYNTAX  INTEGER {
+			off(0),
+			to_be_stopped(1),
+			starting(2),
+			started(3),
+			connected(4),
+			reconnecting(5)
+		}
+		ACCESS  read-only
+		STATUS  optional
+		DESCRIPTION
+			"Channel link state"
+		::= { ChannelStatusEntry 2 }
+
+	ChannelStatusStream OBJECT-TYPE
+		SYNTAX   DisplayString (SIZE (0..25)) 
+		ACCESS  read-only
+		STATUS  optional
+		DESCRIPTION
+			"Stream name."
+		::= { ChannelStatusEntry 3 }
+
+	ChannelStatusServer OBJECT-TYPE
+		SYNTAX  DisplayString (SIZE (0..25)) 
+		ACCESS  read-only
+		STATUS  optional
+		DESCRIPTION
+			"Server name."
+		::= { ChannelStatusEntry 4 }
+
+	ChannelStatusMetainterval OBJECT-TYPE
+		SYNTAX  INTEGER
+		ACCESS  read-only
+		STATUS  optional
+		DESCRIPTION
+			"Metainterval."
+		::= { ChannelStatusEntry 5 }
+
+	ChannelStatusBitrate OBJECT-TYPE
+		SYNTAX  INTEGER
+		ACCESS  read-only
+		STATUS  optional
+		DESCRIPTION
+			"Bitrate."
+		::= { ChannelStatusEntry 6 }
+
+	ChannelStatusSamplerate OBJECT-TYPE
+		SYNTAX  INTEGER
+		ACCESS  read-only
+		STATUS  optional
+		DESCRIPTION
+			"Samplerate."
+		::= { ChannelStatusEntry 7 }
+
+	RadioOutput OBJECT-TYPE
+		SYNTAX  INTEGER {
+			off(0),
+			on(1),
+			off_temperature_limit(2),
+			off_temperature_hyst(3),
+			off_power_up_limit(4),
+			off_power_bottmom_limit(5),
+			off_power_pause(6),
+			off_protection_minor(7),
+			off_protection_major(8),
+			off_protection_pause(9)
+		}
+		ACCESS  read-only
+		STATUS  mandatory
+		DESCRIPTION
+			"radioOutput param."
+		::= { MaintenanceMgt 1 2 }
+
+	RadioTermperature OBJECT-TYPE
+		SYNTAX   DisplayString (SIZE (0..32)) 
+		ACCESS    read-only
+		STATUS    mandatory
+		DESCRIPTION
+			"Device temperature in degrees."
+		::= { MaintenanceMgt 1 3 }
+
+	RadioInternalPower1 OBJECT-TYPE
+		SYNTAX   DisplayString (SIZE (0..32)) 
+		ACCESS    read-only
+		STATUS    mandatory
+		DESCRIPTION
+			"Internal power 1 in volts."
+		::= { MaintenanceMgt 1 4 }
+
+	RadioInternalPower2 OBJECT-TYPE
+		SYNTAX   DisplayString (SIZE (0..32)) 
+		ACCESS    read-only
+		STATUS    mandatory
+		DESCRIPTION
+			"Internal power 2 in volts."
+		::= { MaintenanceMgt 1 5 }
+		
+
+----Ethernet status---------
+
+
+	EthStatusTable OBJECT-TYPE
+		SYNTAX  SEQUENCE OF EthPortEntry
+		ACCESS  not-accessible
+		STATUS  optional
+		DESCRIPTION
+			" Table of status parameters for Ethernet"
+		::= { MaintenanceMgt 2 }
+
+	EthPortEntry OBJECT-TYPE
+		SYNTAX  EthPortEntry
+		ACCESS  not-accessible
+		STATUS  optional
+		DESCRIPTION
+			"Ethernet status params."
+		INDEX   { EthStatusId }
+		::= { EthStatusTable 1 }
+
+	EthPortEntry ::=
+		SEQUENCE {
+			EthStatusId
+				INTEGER,
+			EthStatusLink
+				INTEGER,
+			EthStatusSpeed
+				INTEGER,
+			EthStatusDuplex
+				INTEGER
+        }
+
+	EthStatusId OBJECT-TYPE
+		SYNTAX  INTEGER(1..1)
+		ACCESS  read-only
+		STATUS  optional
+		DESCRIPTION
+			"Ethernet port number."
+		::= { EthPortEntry 1 }
+
+	EthStatusLink OBJECT-TYPE
+		SYNTAX  INTEGER {
+			down(0),
+			up(1)
+		}
+		ACCESS  read-only
+		STATUS  optional
+		DESCRIPTION
+			"Ethernet link state."
+		::= { EthPortEntry 2 }
+
+	EthStatusSpeed OBJECT-TYPE
+		SYNTAX  INTEGER {
+			speed_10(10),
+			speed_100(100)
+		}
+		ACCESS  read-only
+		STATUS  optional
+		DESCRIPTION
+			"Ethernet port speed."
+		::= { EthPortEntry 3 }
+
+	EthStatusDuplex OBJECT-TYPE
+		SYNTAX  INTEGER {
+			unknown(0),
+			half(1),
+			full(2)
+		}
+		ACCESS  read-only
+		STATUS  optional
+		DESCRIPTION
+			"Ethernet port duplex value."
+		::= { EthPortEntry 4 }
+
+----Alarms---------
+
+	AlarmEthLos OBJECT-TYPE
+		SYNTAX  INTEGER {
+			off(0),
+			on(1)
+		}
+		ACCESS    read-only
+		STATUS    mandatory
+		DESCRIPTION
+			"Ethernet connection lost."
+		::= { Alarm 1 }
+
+	AlarmShortcut OBJECT-TYPE
+		SYNTAX  INTEGER {
+			off(0),
+			on(1)
+		}
+		ACCESS    read-only
+		STATUS    mandatory
+		DESCRIPTION
+			"Shortcut alarm."
+		::= { Alarm 2 }
+
+	AlarmPowerUpLimit OBJECT-TYPE
+		SYNTAX  INTEGER {
+			off(0),
+			on(1)
+		}
+		ACCESS    read-only
+		STATUS    mandatory
+		DESCRIPTION
+			"Power up limit alarm."
+		::= { Alarms 3 }
+
+	AlarmPowerBottomLimit OBJECT-TYPE
+		SYNTAX  INTEGER {
+			off(0),
+			on(1)
+		}
+		ACCESS    read-only
+		STATUS    mandatory
+		DESCRIPTION
+			"Power bottom limit alarm."
+		::= { Alarm 4 }
+
+	AlarmTemperatureLimit OBJECT-TYPE
+		SYNTAX  INTEGER {
+			off(0),
+			on(1)
+		}
+		ACCESS    read-only
+		STATUS    mandatory
+		DESCRIPTION
+			"Temperature limit alarm."
+		::= { Alarm 5 }
+
+	AlarmChannel1NotConnected OBJECT-TYPE
+		SYNTAX  INTEGER {
+			off(0),
+			on(1)
+		}
+		ACCESS    read-only
+		STATUS    mandatory
+		DESCRIPTION
+			"Channel1 connection lost."
+		::= { Alarm 6 }
+
+	AlarmChannel2NotConnected OBJECT-TYPE
+		SYNTAX  INTEGER {
+			off(0),
+			on(1)
+		}
+		ACCESS    read-only
+		STATUS    mandatory
+		DESCRIPTION
+			"Channel2 connection lost."
+		::= { Alarm 7 }
+
+	AlarmChannel3NotConnected OBJECT-TYPE
+		SYNTAX  INTEGER {
+			off(0),
+			on(1)
+		}
+		ACCESS    read-only
+		STATUS    mandatory
+		DESCRIPTION
+			"Channel3 connection lost."
+		::= { Alarm 8 }
+
+    TimeCurrent OBJECT-TYPE
+        SYNTAX   DisplayString (SIZE (0..32)) 
+        ACCESS    read-only
+        STATUS    mandatory
+        DESCRIPTION
+            "Current time value for device. For example: 12-13-2011 16:47:52"
+        ::= { MaintenanceMgt 4 }
+
+
+----------------------------------------
+--------- Nateks management
+----------------------------------------
+
+	Alarms OBJECT-TYPE
+		SYNTAX  INTEGER {
+				alarm_no(1),
+				alarm_nonurgent(2),
+				alarm_urgent(3),
+				alarms_urgent_and_nonurgent(4)
+		}
+		ACCESS    read-only
+		STATUS    mandatory
+		DESCRIPTION
+			"Current alarm status for device."
+		::= { NateksMgmt 1 }
+
+	Reset OBJECT-TYPE
+		SYNTAX  INTEGER {
+					reset(1), 
+					readValue(2)
+		}
+		ACCESS  read-write
+		STATUS  mandatory
+		DESCRIPTION
+			"Writing reset(1) to Reset perform device rebooting. Read always return readValue(2)."
+		::= { NateksMgmt 2 }
+
+	ModelName OBJECT-TYPE
+		SYNTAX  DisplayString (SIZE (0..255))
+		ACCESS  read-only
+		STATUS  mandatory
+		DESCRIPTION
+			"Model name, for example MGS-3C-RGN. It is mandatory that this only contain printable ASCII characters." 
+		::= { SysInfo 1 }
+
+	DeviceId OBJECT-TYPE
+		SYNTAX   DisplayString (SIZE (0..32)) 
+		ACCESS    read-write
+		STATUS    mandatory
+		DESCRIPTION
+			"Device ID, displayed in the main menu of the module. It is mandatory that this only contain printable ASCII characters."
+		::= { SysInfo 2 }
+
+	HardwareVer OBJECT-TYPE
+		SYNTAX  DisplayString (SIZE (0..255))
+		ACCESS  read-only
+		STATUS  mandatory
+		DESCRIPTION
+		"Version of the device's hardware. For examle: 1.0"
+		::= { SysInfo 3 }
+
+	SoftwareVer OBJECT-TYPE
+		SYNTAX  DisplayString (SIZE (0..255))
+		ACCESS  read-only
+		STATUS  mandatory
+		DESCRIPTION
+			"Version of the device's main software. For examle: 3.5.0.5.9/5.0"
+		::= { SysInfo 4 }
+
+	SoftwareDate OBJECT-TYPE
+		SYNTAX  DisplayString (SIZE (0..32))
+		ACCESS  read-only
+		STATUS  mandatory
+		DESCRIPTION
+			"Build date of the device's main software in MM.DD.YYYY format."
+		::= { SysInfo 5 }
+
+	ModuleType OBJECT-TYPE
+		SYNTAX  INTEGER {
+			subrack(1),
+			standalone(2),
+			standalone-small(3),
+			rackmount(4)
+		}
+		ACCESS  read-only
+		STATUS  optional
+		DESCRIPTION
+			"Module type. Read value = standalone(2)."
+		::= { SysInfo 6 }
+
+	SubrackAddress OBJECT-TYPE
+		SYNTAX  INTEGER
+		ACCESS  read-only
+		STATUS  optional
+		DESCRIPTION
+			"Read value = 0. This is dumb variable - do not use it."
+		::= { SysInfo 7 }
+
+	ErrorCode OBJECT-TYPE
+		SYNTAX  INTEGER
+		ACCESS  read-only
+		STATUS  optional
+		DESCRIPTION
+			"Read value = 0. This is dumb variable - do not use it."
+		::= { SysInfo 8 }
+
+----------------------------------------
+--------- Trap management
+----------------------------------------
+
+	TrapShortcutCircuitOn TRAP-TYPE
+		ENTERPRISE  TrapMgt
+		DESCRIPTION
+			"Shortcut circuit on now."
+		::= 01
+
+	TrapShortcutCircuitOff TRAP-TYPE
+		ENTERPRISE  TrapMgt
+		DESCRIPTION
+			"Shortcut circuit off now."
+		::= 02
+
+	TrapPowerUpLimitOn TRAP-TYPE
+		ENTERPRISE  TrapMgt
+		DESCRIPTION
+			"Power up limit on now."
+		::= 03
+
+	TrapPowerUpLimitOff TRAP-TYPE
+		ENTERPRISE  TrapMgt
+		DESCRIPTION
+			"Power up limit off now."
+		::= 04
+
+	TrapPowerBottomLimitOn TRAP-TYPE
+		ENTERPRISE  TrapMgt
+		DESCRIPTION
+			"Power bottom limit on now."
+		::= 05
+
+	TrapPowerBottomLimitOff TRAP-TYPE
+		ENTERPRISE  TrapMgt
+		DESCRIPTION
+			"Power bottom limit off now."
+		::= 06
+
+	TrapTemperatureLimitOn TRAP-TYPE
+		ENTERPRISE  TrapMgt
+		DESCRIPTION
+			"Temperature limit on now."
+		::= 07
+
+	TrapTemperatureLimitOff TRAP-TYPE
+		ENTERPRISE  TrapMgt
+		DESCRIPTION
+			"Temperature limit off now."
+		::= 08
+
+	TrapChannel1NotConnectedOn TRAP-TYPE
+		ENTERPRISE  TrapMgt
+		DESCRIPTION
+			"Channel 1 disconnected now."
+		::= 09
+
+	TrapChannel2NotConnectedOn TRAP-TYPE
+		ENTERPRISE  TrapMgt
+		DESCRIPTION
+			"Channel 2 disconnected now."
+		::= 10
+
+	TrapChannel3NotConnectedOn TRAP-TYPE
+		ENTERPRISE  TrapMgt
+		DESCRIPTION
+			"Channel 3 disconnected now."
+		::= 11
+
+	TrapChannel1NotConnectedOff TRAP-TYPE
+		ENTERPRISE  TrapMgt
+		DESCRIPTION
+			"Channel 1 connected now."
+		::= 12
+
+	TrapChannel2NotConnectedOff TRAP-TYPE
+		ENTERPRISE  TrapMgt
+		DESCRIPTION
+			"Channel 2 connected now."
+		::= 13
+
+	TrapChannel3NotConnectedOff TRAP-TYPE
+		ENTERPRISE  TrapMgt
+		DESCRIPTION
+			"Channel 3 connected now."
+		::= 14
+
+	TrapNotEnoughMemory TRAP-TYPE
+		ENTERPRISE  TrapMgt
+		DESCRIPTION
+			"Memory leaks detected. Current free memory size < 10MB. Reboot now."
+		::= 15
+
+END
