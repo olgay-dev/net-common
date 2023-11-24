@@ -1,0 +1,81 @@
+- name: create acme unix group
+  group: name="acme" state=present
+
+- name: create acme unix user
+  user:
+    name: "acme"
+    group: "acme"
+    home: "/home/acme"
+    shell: /bin/bash
+    state: present
+
+- name: Change ownership of a directory
+  file:
+    path: /home/acme
+    state: directory
+    recurse: yes
+    mode: '0755'
+
+- name: make dir for www auth
+  file: path=/home/acme/challenges owner=acme group=acme mode=0755 state=directory
+
+- name: Dowload acme.sh
+  get_url:
+    url: https://raw.githubusercontent.com/Neilpang/acme.sh/2.8.3/acme.sh
+    dest: /home/acme/acme.sh
+    owner: acme
+    group: acme
+    mode: 0755
+    checksum: sha256:d611d44a99faea7e0889587f074d74625979a5df4b0eac75c48feb8f7b733c57
+  register: acme_download
+
+- name: install acme.sh
+  when: acme_download.changed
+  become: yes
+  become_user: acme
+  command: /bin/bash -c "cd /home/acme && /home/acme/acme.sh --install"
+
+- name: add nginx-reload command alias to sudoers
+  lineinfile:
+    dest: /etc/sudoers
+    backup: yes
+    regexp: "^Cmnd_Alias NGINX_SERVICE"
+    insertafter: "^# Cmnd alias spec"
+    line: "Cmnd_Alias NGINX_SERVICE= /usr/sbin/service nginx reload"
+    state: present
+
+- name: add acme user to sudoers (nopasswd:nginx)
+  lineinfile:
+    dest: /etc/sudoers
+    backup: yes
+    regexp: "^acme  ALL=[(]ALL[)] NOPASSWD:NGINX_SERVICE"
+    line: "acme  ALL=(ALL) NOPASSWD:NGINX_SERVICE"
+    state: present
+
+- name: add acme nginx snippet
+  template:
+    src: roles/acme-sh/files/acme.conf
+    dest: /etc/nginx/snippets/acme.conf
+    owner: root
+    group: root
+    mode: 0644
+
+- name: check config exists
+  stat:
+    path: "/home/acme/.acme.sh/{{inventory_hostname}}/{{inventory_hostname}}.conf"
+  register: acme_conf_exists
+
+- name: fix renew hook for default conf
+  when: acme_conf_exists.stat.exists == True
+  lineinfile:
+    dest: "/home/acme/.acme.sh/{{inventory_hostname}}/{{inventory_hostname}}.conf"
+    regexp: "^Le_RenewHook="
+    line: "Le_RenewHook='sudo service nginx reload'"
+    state: present
+  register: acme_hook
+
+- name: acme run cron-renew certs
+  when: (acme_hook is defined and acme_hook.changed) or acme_download.changed
+  become: yes
+  become_user: acme
+  command: /bin/bash -c "cd /home/acme && ./.acme.sh/acme.sh --cron"
